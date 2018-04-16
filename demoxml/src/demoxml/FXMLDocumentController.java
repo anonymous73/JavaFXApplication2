@@ -22,30 +22,30 @@ public class FXMLDocumentController implements Initializable {
     
  
     @FXML
-    private Pane pri_all ,pri_intel , pri_fsd , pri_sfs;
+    private Pane pri_home ,pri_editor , pri_design , pri_dataflow;
     
-    @FXML
-    private Button btn_all , btn_intel , btn_fsd , btn_sfs;
+        @FXML
+    private Button btn_home , btn_editor , btn_design , btn_dataflow;
 
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
-        if(event.getSource() == btn_all)
+        if(event.getSource() == btn_home)
         {
-            pri_all.toFront();
+            pri_home.toFront();
         }
-        else if(event.getSource() == btn_intel)
+        else if(event.getSource() == btn_editor)
         {
-                        pri_intel.toFront();
+                        pri_editor.toFront();
         }
-        else if(event.getSource() == btn_fsd)
+        else if(event.getSource() == btn_design)
         {
-                        pri_fsd.toFront();
+                        pri_design.toFront();
         }
-        else if(event.getSource() == btn_sfs)
+        else if(event.getSource() == btn_dataflow)
         {
-                        pri_sfs.toFront();
+                        pri_dataflow.toFront();
         }
             
     }

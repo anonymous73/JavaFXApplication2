@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -15,18 +16,21 @@
             <DropShadow />
          </effect>
          <children>
-            <Pane fx:id="pri_all" layoutX="201.0" layoutY="-1.0" prefHeight="458.0" prefWidth="507.0" style="-fx-background-color: #272D2D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Pane fx:id="pri_intel" layoutX="204.0" layoutY="-1.0" prefHeight="449.0" prefWidth="514.0" style="-fx-background-color: #0055B9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Pane fx:id="pri_fsd" layoutX="202.0" prefHeight="458.0" prefWidth="526.0" style="-fx-background-color: #F6F8FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Pane fx:id="pri_sfs" layoutX="200.0" layoutY="-2.0" prefHeight="458.0" prefWidth="507.0" style="-fx-background-color: #23CE6B;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Pane fx:id="pri_design" layoutX="202.0" prefHeight="458.0" prefWidth="526.0" style="-fx-background-color: #F6F8FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Pane fx:id="pri_editor" layoutX="200.0" layoutY="-2.0" prefHeight="458.0" prefWidth="507.0" style="-fx-background-color: #23CE6B;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextArea layoutX="195.0" layoutY="21.0" prefHeight="409.0" prefWidth="507.0" />
+               </children></Pane>
+            <Pane fx:id="pri_dataflow" layoutX="198.0" layoutY="10.0" prefHeight="458.0" prefWidth="514.0" style="-fx-background-color: #F6F8FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Pane fx:id="pri_home" layoutX="204.0" layoutY="-1.0" prefHeight="449.0" prefWidth="514.0" style="-fx-background-color: #0055B9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="-1.0" prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #f0f7ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btn_all" layoutY="46.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="All processors" textAlignment="CENTER" />
-            <Button fx:id="btn_intel" layoutY="102.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="Intel" textAlignment="CENTER" />
-            <Button fx:id="btn_fsd" layoutY="159.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="fsd" textAlignment="CENTER" />
-            <Button fx:id="btn_sfs" layoutY="215.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="sfs" textAlignment="CENTER" />
+            <Button fx:id="btn_home" layoutY="46.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="Home" textAlignment="CENTER" />
+            <Button fx:id="btn_editor" layoutY="102.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="Editor" textAlignment="CENTER" />
+            <Button fx:id="btn_design" layoutY="159.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="Design" textAlignment="CENTER" />
+            <Button fx:id="btn_dataflow" layoutY="215.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="56.0" prefWidth="200.0" text="Data Flow" textAlignment="CENTER" />
             <AnchorPane prefHeight="434.0" prefWidth="40.0" style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <effect>
                   <DropShadow />
