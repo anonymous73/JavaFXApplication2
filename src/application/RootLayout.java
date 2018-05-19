@@ -7,7 +7,6 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
@@ -59,7 +58,7 @@ public class RootLayout extends AnchorPane{
 		getChildren().add(mDragOverIcon);
 		
 		//populate left pane with multiple colored icons for testing
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 7; i++) {
 			
 			DragIcon icn = new DragIcon();
 			
@@ -165,7 +164,7 @@ public class RootLayout extends AnchorPane{
 				event.setDropCompleted(true);
 			}
 		};
-		
+
 		this.setOnDragDone (new EventHandler <DragEvent> (){
 			
 			@Override
@@ -177,92 +176,101 @@ public class RootLayout extends AnchorPane{
 								
 				mDragOverIcon.setVisible(false);
 				
-				//Create node drag operation
 				DragContainer container = 
 						(DragContainer) event.getDragboard().getContent(DragContainer.AddNode);
 				
 				if (container != null) {
 					if (container.getValue("scene_coords") != null) {
 					
-						if (container.getValue("type").equals(DragIconType.cubic_curve.toString())) {
-							CubicCurveDemo curve = new CubicCurveDemo();
-							
-							right_pane.getChildren().add(curve);
-							
-							Point2D cursorPoint = container.getValue("scene_coords");
+						DragIcon droppedIcon = new DragIcon();
+						
+						droppedIcon.setType(DragIconType.valueOf(container.getValue("type")));
+						right_pane.getChildren().add(droppedIcon);
 
-							curve.relocateToPoint(
-									new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
-									);							
-						}
-						else {
-							
-							DraggableNode node = new DraggableNode();
-							
-							node.setType(DragIconType.valueOf(container.getValue("type")));
-							right_pane.getChildren().add(node);
-	
-							Point2D cursorPoint = container.getValue("scene_coords");
-	
-							node.relocateToPoint(
-									new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
-									);
-						}
+						Point2D cursorPoint = container.getValue("scene_coords");
+
+						droppedIcon.relocateToPoint(
+								new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
+								);
 					}
-				}
-				/*
-				//Move node drag operation
-				container = 
-						(DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
-				
-				if (container != null) {
-					if (container.getValue("type") != null)
-						System.out.println ("Moved node " + container.getValue("type"));
-				}
-				*/
-
-				//AddLink drag operation
-				container =
-						(DragContainer) event.getDragboard().getContent(DragContainer.AddLink);
-				
-				if (container != null) {
-					
-					//bind the ends of our link to the nodes whose id's are stored in the drag container
-					String sourceId = container.getValue("source");
-					String targetId = container.getValue("target");
-
-					if (sourceId != null && targetId != null) {
-						
-						//	System.out.println(container.getData());
-						NodeLink link = new NodeLink();
-						
-						//add our link at the top of the rendering order so it's rendered first
-						right_pane.getChildren().add(0,link);
-						
-						DraggableNode source = null;
-						DraggableNode target = null;
-						
-						for (Node n: right_pane.getChildren()) {
-							
-							if (n.getId() == null)
-								continue;
-							
-							if (n.getId().equals(sourceId))
-								source = (DraggableNode) n;
-						
-							if (n.getId().equals(targetId))
-								target = (DraggableNode) n;
-							
-						}
-						
-						if (source != null && target != null)
-							link.bindEnds(source, target);
-					}
-						
 				}
 
 				event.consume();
 			}
-		});		
+		});
 	}
+	/*
+	public void buildSplitPaneDragHandlers() {
+		
+		//drag detection for widget in the left-hand scroll pane to create a node in the right pane 
+		mWidgetDragDetected = new EventHandler <MouseEvent> () {
+			@Override
+			public void handle(MouseEvent event) {
+				fs_right_pane.setOnDragDropped(null);
+				fs_root.setOnDragOver(null);
+				fs_right_pane.setOnDragOver(null);
+				
+				fs_right_pane.setOnDragDropped(mRightPaneDragDropped);
+				fs_root.setOnDragOver(mRootDragOver);
+				
+                //begin drag ops
+                mDragObject = ((IFileSystemObject) (event.getSource())).getDragObject();
+                
+                if (!fs_root.getChildren().contains((Node)mDragObject))
+                	fs_root.getChildren().add((Node)mDragObject);
+                
+                mDragObject.relocateToPoint(new Point2D (event.getSceneX(), event.getSceneY()));
+                
+                ClipboardContent content = new ClipboardContent();
+                content.putString(mDragObject.getFileSystemType().toString());
+                mDragObject.startDragAndDrop (TransferMode.ANY).setContent(content);
+                mDragObject.setVisible(true);
+                
+                event.consume();					
+			}					
+		};
+		
+		//drag over transition to move widget form left pane to right pane
+		mRootDragOver = new EventHandler <DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				
+				Point2D p = fs_right_pane.sceneToLocal(event.getSceneX(), event.getSceneY());
+				if (!fs_right_pane.boundsInLocalProperty().get().contains(p)) {
+					mDragObject.relocateToPoint(new Point2D(event.getX(), event.getY()));
+					return;
+				}
+				fs_root.removeEventHandler(DragEvent.DRAG_OVER, this);
+				fs_right_pane.setOnDragOver(mRightPaneDragOver);
+				event.consume();
+			}
+		};
+		
+		//drag over in the right pane
+		mRightPaneDragOver = new EventHandler <DragEvent> () {
+			@Override
+			public void handle(DragEvent event) {
+				event.acceptTransferModes(TransferMode.ANY);
+				mDragObject.relocateToPoint(mDragObject.getParent().sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY())));
+				
+				event.consume();
+			}
+		};		
+		
+		//drop action in the right pane to create a new node
+		mRightPaneDragDropped = new EventHandler <DragEvent> () {
+			@Override
+			public void handle(DragEvent event) {
+				Point2D p = fs_right_pane.sceneToLocal(new Point2D (event.getSceneX(), event.getSceneY()));	
+				
+				self.addFileSystemNode(mDragObject.getFileSystemType(), p);
+				event.setDropCompleted(true);
+				fs_right_pane.setOnDragOver(null);
+				fs_right_pane.setOnDragDropped(null);
+				fs_root.setOnDragOver(null);
+				
+				event.consume();
+			}
+		};		
+	}		*/
 }

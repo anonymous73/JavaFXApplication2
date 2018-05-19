@@ -5,25 +5,15 @@
  */
 package javafxapplication2;
 
-import application.DragIcon;
-import application.DragIconType;
-import application.DraggableNode;
-import application.RootLayout;
 import java.io.File;
 import java.util.Arrays;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 /**
  *
@@ -32,7 +22,7 @@ import javafx.stage.Stage;
 public class EditorController {
 
     @FXML
-    public TextArea areaText;
+    private TextArea areaText;
 
     private TextFile currentTextFile;
 
@@ -44,23 +34,14 @@ public class EditorController {
     @FXML
     private Button btn_home , btn_editor , btn_design , btn_dataflow;
 
-
     public EditorController(EditorModel model) {
         this.model = model;
         System.out.println("model");
     }
     
-    public EditorController() {
-    }
-  
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
-            
-    DraggableNode dn = new DraggableNode();
-        //DragIcon di = DragIcon()
-    System.out.println("javafxapplication2.EditorController.handleButtonAction():"+dn.getType());
-        
         if(event.getSource() == btn_home)
         {
             System.out.println("demoxml.EditorController.handleButtonAction().home");
@@ -68,34 +49,13 @@ public class EditorController {
         }
         else if(event.getSource() == btn_editor)
         {
-            //block();
-            //System.out.println("demoxml.EditorController.handleButtonAction().btn_editor"+ dn.getType());
-            
-
+            System.out.println("demoxml.EditorController.handleButtonAction().btn_editor");
             pri_editor.toFront();
         }
         else if(event.getSource() == btn_design)
         {
             System.out.println("demoxml.EditorController.handleButtonAction().btn_design");
-            
-            
-            Stage primaryStage = new Stage();
-            BorderPane root = new BorderPane();
-		
-		try {
-			
-			Scene scene = new Scene(root,640,480);
-			scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		root.setCenter(new RootLayout());
-                
-            //pri_design.toFront();
+            pri_design.toFront();
         }
         else if(event.getSource() == btn_dataflow)
         {
@@ -128,11 +88,6 @@ public class EditorController {
             }
         }
     }
-    
-    public void blocks(String t) {
-        areaText.appendText("bala"+ "\n");
-        System.out.println("javafxapplication2.EditorController.block(String)"+t);
-    }
 
     @FXML
     private void onClose() {
@@ -148,54 +103,4 @@ public class EditorController {
         alert.show();
     }
 
-    public DragIconType block(DragIconType mType) {
-        System.out.println("javafxapplication2.EditorController.block()"+mType);
-        //DragIconType t = (DragIconType)mType;
-        //block(t);
-        String blockColor;
-        
-        switch (mType) {
-			
-			case blue:
-                               blockColor = "blue";
-                               blocks(blockColor);
-			break;
-
-			case red:
-				blockColor = "red";
-                                blocks(blockColor);
-                              //ec.areaText.appendText("bala" + "\n");                             
-			break;
-
-			case green:
-				blockColor = "green";
-                                blocks(blockColor);
-			break;
-
-			case grey:
-				blockColor = "grey";
-                                blocks(blockColor);
-			break;
-
-			case purple:
-				blockColor = "purple";
-                                blocks(blockColor);
-			break;
-
-			case yellow:
-				blockColor = "yellow";
-                                blocks(blockColor);
-			break;
-
-			case black:
-				blockColor = "black";
-                                blocks(blockColor);
-			break;
-			
-			default:
-			break;
-			}
-        return mType;
-    }  
-    
 }
