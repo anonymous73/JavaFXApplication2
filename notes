@@ -1,0 +1,30 @@
+  416  git clone https://gitlab.ub.uni-bielefeld.de/snn_solver/single_neuron_intro.git
+  417  sudo single_neuron_intro sync
+  418  sudo single_neuron_intro sync
+  419  sudo single_neuron_intro sync
+  420  git clone https://gitlab.ub.uni-bielefeld.de/snn_solver/single_neuron_intro.git
+  421  cd single_neuron_intro/
+  422  mkdir build && build
+  423  mkdir build && cd build
+  424  mkdir build
+  425  mkdir build && cd build
+  426  cmake .. -DSTATIC_LINKING=FALSE
+  427  make -j4
+  428  ./simple 
+  429  ./simple <SIMULATOR>
+  430  cd ..
+  431  ./virtualenvs.sh
+  432  chmod +x virtualenvs.sh 
+  433  ./virtualenvs.sh
+  434  pip install numpy
+  435  pip install --upgrade pip
+  436  ./simple nest
+  437  source ~/venvs/nest/bin/activate
+  438  nest
+  439  ./simple nest
+  440  cd build/
+  441  ./simple nest
+  442  ./simple nest
+  443  #
+  444  ./simple nest
+  445  ./simple nest
