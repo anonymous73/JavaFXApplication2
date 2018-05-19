@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
 /**
@@ -24,10 +25,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Pane pri_home ,pri_editor , pri_design , pri_dataflow;
     
-        @FXML
+    
+    @FXML
     private Button btn_home , btn_editor , btn_design , btn_dataflow;
 
-    
+       
+        
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
@@ -37,6 +40,7 @@ public class FXMLDocumentController implements Initializable {
         }
         else if(event.getSource() == btn_editor)
         {
+                        
                         pri_editor.toFront();
         }
         else if(event.getSource() == btn_design)

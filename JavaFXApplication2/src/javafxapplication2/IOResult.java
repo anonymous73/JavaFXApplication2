@@ -30,4 +30,6 @@ public class IOResult<T>{
     public T getData(){
         return data;
     }
+    
+    
 }
